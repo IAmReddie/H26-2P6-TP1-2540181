@@ -26,6 +26,14 @@ namespace adaptation_tp1_console
             List<Morceau> listeLectureUtilisateur = new List<Morceau>(); // Partie 2
 
             ChargerMorceaux(BIBLIOTHEQUE, repertoireRadioEtudiante);
+            //Console.WriteLine("Nombre de morceaux chargés : " + repertoireRadioEtudiante.Count);
+            //foreach (Morceau m in repertoireRadioEtudiante)
+            //{
+            //    Console.WriteLine(m);
+            //}
+            //Console.WriteLine();
+
+            AfficherListeDeMorceaux(repertoireRadioEtudiante);
 
 
 
@@ -42,7 +50,7 @@ namespace adaptation_tp1_console
             /// 
 
 
-            
+
 
 
 
@@ -65,11 +73,11 @@ namespace adaptation_tp1_console
         /// ----------------------------------------------------------------------------------------------------
         internal static List<Morceau> ChargerMorceaux(string pNomDuFichier, List<Morceau> pListeMorceaux)
         {
-           if (File.Exists(pNomDuFichier)) 
+            if (!File.Exists(pNomDuFichier)) 
                 return pListeMorceaux;
 
-           using (StreamReader reader = new StreamReader(pNomDuFichier))
-           {
+            using (StreamReader reader = new StreamReader(pNomDuFichier))
+            {
                 string ligne;
 
                 while ((ligne = reader.ReadLine()) != null)
@@ -87,15 +95,13 @@ namespace adaptation_tp1_console
                     int tempsTotal = (minutes * 60 ) + secondes;
 
                     Morceau m = new Morceau(artiste, album, titre, cote, tempsTotal);
+                    
 
                     pListeMorceaux.Add(m);
+
                     
                 }
-           }
-
-
-            return pListeMorceaux;
-
+            }    return pListeMorceaux;
         }
         #endregion
 
@@ -107,6 +113,14 @@ namespace adaptation_tp1_console
         /// <param name="pListeMorceaux"> liste de morceaux </param>
         /// ----------------------------------------------------------------------------------------
         
+        internal static void AfficherListeDeMorceaux(List<Morceau> pListeMorceaux)
+        {
+            for (int i = 0; i < pListeMorceaux.Count; i++)
+            {
+                Console.WriteLine($"{i} - {pListeMorceaux[i]}");
+            }
+        }
+
         #endregion
 
         #region TODO 03 : Ajouter un morceau au répertoire (3%)
@@ -122,7 +136,7 @@ namespace adaptation_tp1_console
         /// <param name="pDurée"> durée du morceau en secondes </param>
         /// <returns>  liste de morceaux contenant une chanson additionnelle  </returns>
         /// ----------------------------------------------------------------------------------------
-        
+
         #endregion
 
         #region TODO 04 : Supprimer un morceau du répertoire (2%)
@@ -134,7 +148,7 @@ namespace adaptation_tp1_console
         /// <param name="pIndexMorceau"> index du morceau à supprimer dans la liste </param>
         /// <returns>  liste de morceaux contenant une chanson en moins  </returns>
         /// ----------------------------------------------------------------------------------------
-        
+
         #endregion
 
         #region TODO 05 : Modifier la cote d'appréciation d'un morceau (2%)
@@ -169,7 +183,7 @@ namespace adaptation_tp1_console
         /// <param name="pListeMorceaux"> liste de morceaux </param>
         /// <param name="pIndexMorceau"> index du morceau sélectionné </param>
         /// ----------------------------------------------------------------------------------------
-       
+
         #endregion
 
         #region TODO 08 : Afficher les statistiques du répertoire (5%)
@@ -179,7 +193,7 @@ namespace adaptation_tp1_console
         /// </summary>
         /// <param name="pListeMorceaux"> liste de morceaux </param>
         /// ----------------------------------------------------------------------------------------
-       
+
         #endregion
 
         #region TODO 09 : Enregistrer les modifications au moment de quitter (5%)
@@ -204,7 +218,7 @@ namespace adaptation_tp1_console
         /// Permet d'afficher les options du menu dans la console
         /// </summary>
         /// -----------------------------------------------------------------------------------------------
-       
+
 
         #endregion
 
@@ -222,7 +236,7 @@ namespace adaptation_tp1_console
         /// Permet d'afficher les options de connexions au démarrage : "se créer un compte" et "continuer en tant qu'invité"
         /// </summary>
         /// -----------------------------------------------------------------------------------------------
-       
+
         #endregion
 
         #region TODO 15 : Afficher le profil d'un utilisateur connecté (2%)
@@ -231,7 +245,7 @@ namespace adaptation_tp1_console
         /// Permet d'afficher les informations d'un utilisateur : son nom d'utilisateur, son mot de passe caché par des *, son statut 
         /// </summary>
         /// -----------------------------------------------------------------------------------------------
-       
+
         #endregion
 
 
