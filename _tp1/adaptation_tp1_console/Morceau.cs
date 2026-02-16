@@ -18,7 +18,7 @@ namespace adaptation_tp1_console
         #region CHAMPS - Variables MEMBRE (5) et PROPRIÉTÉS
 
         /// =====================================================================
-        private readonly  string m_artiste;
+        private readonly string m_artiste;
         /// --------------------------
         /// <summary>
         /// Obtient l'artiste.

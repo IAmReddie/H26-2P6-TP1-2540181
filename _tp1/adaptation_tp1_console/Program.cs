@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Net.NetworkInformation;
 using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace adaptation_tp1_console
 {
@@ -24,6 +25,7 @@ namespace adaptation_tp1_console
             List<Morceau> repertoireRadioEtudiante = new List<Morceau>(); // Partie 1
             List<Morceau> listeLectureUtilisateur = new List<Morceau>(); // Partie 2
 
+            ChargerMorceaux(BIBLIOTHEQUE, repertoireRadioEtudiante);
 
 
 
@@ -40,11 +42,13 @@ namespace adaptation_tp1_console
             /// 
 
 
-            ChargerMorceaux(BIBLIOTHEQUE, repertoireRadioEtudiante);
+            
 
 
 
             #endregion
+
+
 
         }
 
@@ -61,11 +65,37 @@ namespace adaptation_tp1_console
         /// ----------------------------------------------------------------------------------------------------
         internal static List<Morceau> ChargerMorceaux(string pNomDuFichier, List<Morceau> pListeMorceaux)
         {
+           if (File.Exists(pNomDuFichier)) 
+                return pListeMorceaux;
 
+           using (StreamReader reader = new StreamReader(pNomDuFichier))
+           {
+                string ligne;
 
+                while ((ligne = reader.ReadLine()) != null)
+                {
+                    string[] champs = ligne.Split('|');
+
+                    string artiste = champs[0];
+                    string album = champs[1];
+                    string titre = champs[2];
+                    int cote = int.Parse(champs[3]);
+
+                    string[] temps = champs[4].Split(':');
+                    int minutes = int.Parse(temps[0]);
+                    int secondes = int.Parse(temps[1]);
+                    int tempsTotal = (minutes * 60 ) + secondes;
+
+                    Morceau m = new Morceau(artiste, album, titre, cote, tempsTotal);
+
+                    pListeMorceaux.Add(m);
+                    
+                }
+           }
 
 
             return pListeMorceaux;
+
         }
         #endregion
 
